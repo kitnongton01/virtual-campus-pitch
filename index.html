@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Campus & Presentation Hub — Project Concept</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-soft: #f1f5f9;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --primary: #4f46e5;
+      --primary-soft: #eef2ff;
+      --accent-coral: #f43f5e;
+      --accent-coral-soft: #fff1f2;
+      --accent-mint: #0d9488;
+      --accent-mint-soft: #f0fdfa;
+      --accent-amber: #d97706;
+      --accent-amber-soft: #fffbeb;
+      --radius: 18px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 10px 30px -10px rgba(15, 23, 42, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans Thai', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    /* Sticky Top Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #eef2ff 0%, #fff1f2 50%, #f0fdfa 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 40px;
+      margin-bottom: 48px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: #ffffff;
+      color: var(--primary);
+      border: 1px solid rgba(79, 70, 229, 0.2);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+      line-height: 1.3;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p.lead {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin-bottom: 28px;
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .pillar-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+    }
+
+    .pillar-card .tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+
+    .pillar-card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 6px;
+    }
+
+    .pillar-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Section */
+    section.block {
+      margin-bottom: 64px;
+      scroll-margin-top: 84px;
+    }
+
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-num {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-soft);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .section-header h2 {
+      font-size: 1.65rem;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      max-width: 760px;
+    }
+
+    /* Visual Mockup Frame */
+    .figure-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 28px;
+    }
+
+    .figure-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      cursor: zoom-in;
+      transition: transform 0.25s ease;
+    }
+
+    .figure-card img:hover {
+      transform: scale(1.008);
+    }
+
+    .figure-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px 6px 4px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .zoom-hint {
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Feature Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 14px;
+    }
+
+    .icon-indigo { background: var(--primary-soft); color: var(--primary); }
+    .icon-coral { background: var(--accent-coral-soft); color: var(--accent-coral); }
+    .icon-mint { background: var(--accent-mint-soft); color: var(--accent-mint); }
+    .icon-amber { background: var(--accent-amber-soft); color: var(--accent-amber); }
+
+    .card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+    }
+
+    .card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.94rem;
+      color: var(--text-muted);
+    }
+
+    .card li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .card li strong {
+      color: var(--text);
+    }
+
+    /* Code / Tag inline */
+    .chip {
+      display: inline-block;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1px 7px;
+      font-size: 0.84em;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Roadmap & Layout Table */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .phase-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .phase-card.p2 { border-top-color: var(--accent-coral); }
+    .phase-card.p3 { border-top-color: var(--accent-mint); }
+
+    .phase-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .phase-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+    }
+
+    .phase-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .phase-card li::before {
+      content: "✓ ";
+      color: var(--accent-mint);
+      font-weight: 700;
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.86);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 100;
+      cursor: zoom-out;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 28px 20px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a class="brand" href="#top">🎓 Virtual Campus Hub</a>
+      <div class="nav-links">
+        <a href="#campus">1. ตึกและห้องชมรม</a>
+        <a href="#avatar">2. อวตาร &amp; โปรไฟล์</a>
+        <a href="#stage">3. เวทีพรีเซนต์ &amp; ติว PDF</a>
+        <a href="#roadmap">4. แผนผัง &amp; Roadmap</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" id="top">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="badge-row">
+        <span class="pill">🌐 Web Community</span>
+        <span class="pill">🧑‍🎨 2D Chibi Avatar</span>
+        <span class="pill">🎙️ ฝึกพรีเซนต์ + ไมค์</span>
+        <span class="pill">📚 ติวข้อสอบ &amp; PDF</span>
+      </div>
+      <h1>Virtual Campus &amp; Presentation Hub</h1>
+      <p class="lead">
+        แพลตฟอร์มคอมมูนิตี้บนเว็บที่จำลอง <strong>ตึกกิจกรรม ชมรม และห้องติว</strong> ให้ผู้ใช้งานสร้างอวตารมาเดินพบปะกัน เลือกเข้าห้องตามความชอบ ฝึกขึ้นเวทีพรีเซนต์งาน เปิดไมค์คุย ติวข้อสอบผ่าน PDF ร่วมกัน และเชื่อมต่อไปคุยต่อใน LINE ส่วนตัวได้อย่างไร้รอยต่อ
+      </p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <span class="tag" style="color: var(--accent-coral);">แรงบันดาลใจ: LINE PLAY</span>
+          <h3>อวตาร &amp; โซเชียลน่ารัก</h3>
+          <p>แต่งตัวอวตาร Chibi แยกชิ้น ถือพร็อพไมค์/หนังสือ มี Speech Bubble ลอยเหนือหัว และ Profile Card เชื่อมความชอบ</p>
+        </div>
+        <div class="pillar-card">
+          <span class="tag" style="color: var(--primary);">แรงบันดาลใจ: Gather.town</span>
+          <h3>ตึกหลายชั้น &amp; เวที Spotlight</h3>
+          <p>แบ่งโซนด้วยพรม/โต๊ะ/เวที เดินใกล้กันถึงได้ยินเสียง และก้าวขึ้นแท่น Podium เพื่อพรีเซนต์ให้คนทั้งห้องฟัง</p>
+        </div>
+        <div class="pillar-card">
+          <span class="tag" style="color: var(--accent-mint);">แรงบันดาลใจ: ZEP</span>
+          <h3>ห้องติว PDF &amp; มินิเกม Quiz</h3>
+          <p>ยัดไฟล์ PDF ขึ้นกระดานไวท์บอร์ดกลางห้อง อ่าน-ไฮไลต์พร้อมกัน และเล่นเกมทายข้อสอบ O/X หรือ A/B/C/D</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 1: CAMPUS & ROOMS -->
+    <section class="block" id="campus">
+      <div class="section-header">
+        <span class="section-num">ส่วนที่ 01</span>
+        <h2>โครงสร้างตึก ชมรม ห้อง และการระบุตำแหน่ง</h2>
+        <p>จัดระเบียบพื้นที่ให้เดินหาง่ายเหมือนอยู่ในอาคารเรียนจริง พร้อมตัวสลับชั้นและโหมดแต่งห้องสำหรับหัวหน้าชมรม</p>
+      </div>
+
+      <figure class="figure-card">
+        <img src="./images/campus-plaza.jpg" alt="ภาพคอนเซปต์พื้นที่ตึกและลานชมรม 2.5D" data-zoom />
+        <figcaption class="figure-caption">
+          <span><strong>ภาพอ้างอิงที่ 1:</strong> ลานกลางตึก 2.5D พร้อมปุ่มสลับชั้นด้านซ้าย (<span class="chip">1F</span> <span class="chip">2F</span> <span class="chip">3F</span>) พิกัดตำแหน่งมุมซ้ายบน และประตูเข้าห้องชมรม</span>
+          <span class="zoom-hint">🔍 คลิกที่ภาพเพื่อขยาย</span>
+        </figcaption>
+      </figure>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon icon-indigo">🏢</div>
+          <h3>การแบ่งชั้นแบบลำดับขั้น (Floor Switcher)</h3>
+          <ul>
+            <li><strong>1F Lobby &amp; Plaza:</strong> ลานรวมพลกลางแจ้ง มีบอร์ดประกาศหาเพื่อนติว และร้านค้าแลกไอเทม</li>
+            <li><strong>2F โซนชมรม (Clubs):</strong> เรียงประตูห้องที่มีป้ายชื่อชมรมและหัวหน้าห้อง (เช่น ชมรมฝึกพรีเซนต์, สายวิทย์-คณิต, ภาษา)</li>
+            <li><strong>3F ห้องติวและหอประชุม:</strong> ห้องสัมมนาใหญ่สำหรับซ้อมพรีเซนต์ และห้องติวย่อยขนาด 4–8 คน</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon icon-mint">📍</div>
+          <h3>ระบบระบุตำแหน่ง (Location &amp; Warp)</h3>
+          <ul>
+            <li><strong>Location Breadcrumb:</strong> แสดงตำแหน่งชัดเจน เช่น <span class="chip">ตึกกลาง &gt; ชั้น 2 &gt; ห้องติวคณิตฯ</span></li>
+            <li><strong>Room Status &amp; Lock:</strong> ห้องส่วนตัวหรือห้องชมรมแสดงไอคอนแม่กุญแจและจำนวนคนออนไลน์</li>
+            <li><strong>ตามหาเพื่อนไว:</strong> กดดูพิกัดของเพื่อนจากรายชื่อแล้วกด <strong>Warp</strong> วาร์ปไปหน้าห้องเพื่อนได้ทันที</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon icon-amber">🛠️</div>
+          <h3>หัวหน้าสร้างและแต่งห้อง (Room Builder)</h3>
+          <ul>
+            <li><strong>วางเฟอร์นิเจอร์แบบ Grid-Snap:</strong> มีแถบของตกแต่งด้านบน พร้อมกรอบไฮไลต์ช่องพื้นสำหรับวางโต๊ะ เวที หรือกระดาน</li>
+            <li><strong>ตั้งค่าสิทธิ์ห้อง:</strong> เปิดสาธารณะ ตั้งรหัสเข้าห้อง หรือกำหนดแท็กหัวข้อของห้อง เช่น <span class="chip">#ติวไฟนอล</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: AVATAR & PROFILE -->
+    <section class="block" id="avatar">
+      <div class="section-header">
+        <span class="section-num">ส่วนที่ 02</span>
+        <h2>อวตาร ไอเทมแต่งตัว &amp; โปรไฟล์เชื่อมความชอบ</h2>
+        <p>สร้างตัวตนให้น่าจดจำสไตล์ LINE PLAY พร้อมแบบสอบถามความชอบที่เชื่อมเพื่อน ห้อง และระบบสื่อสารเข้าด้วยกัน</p>
+      </div>
+
+      <figure class="figure-card">
+        <img src="./images/avatar-closet-profile.jpg" alt="ภาพคอนเซปต์ตู้เสื้อผ้าอวตารและ Profile Card" data-zoom />
+        <figcaption class="figure-caption">
+          <span><strong>ภาพอ้างอิงที่ 2:</strong> หน้าต่าง Closet แต่งตัวอวตารแยกหมวดหมู่ (ซ้าย) คู่กับ Social Profile Card ที่มีแท็กความชอบ ปุ่ม <span class="chip">@Whisper DM</span> และ <span class="chip">LINE Call</span> (ขวา)</span>
+          <span class="zoom-hint">🔍 คลิกที่ภาพเพื่อขยาย</span>
+        </figcaption>
+      </figure>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon icon-coral">👗</div>
+          <h3>แต่งตัวอวตาร &amp; สะสมไอเทม</h3>
+          <ul>
+            <li><strong>Layered 2D Chibi:</strong> แยกชิ้น ทรงผม, หน้าตา, เสื้อ, กางเกง/กระโปรง, รองเท้า, สัตว์เลี้ยง และของถือ (ไมค์, หนังสือ, แท็บเล็ต)</li>
+            <li><strong>แต้มรางวัลจากการใช้งาน:</strong> ได้เหรียญ/หัวใจเมื่อขึ้นเวทีซ้อมพรีเซนต์ครบเวลา หรือแชร์ชีท PDF ที่มีเพื่อนกดถูกใจ</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon icon-indigo">🧩</div>
+          <h3>โปรไฟล์ &amp; คำถามความชอบเชื่อมทั้งระบบ</h3>
+          <ul>
+            <li><strong>Onboarding Matching:</strong> ตอบคำถามเรื่องวิชาที่ชอบ เป้าหมาย งานอดิเรก และสไตล์การเรียน (เงียบๆ / ถกกันสนุก)</li>
+            <li><strong>Smart Recommendation:</strong> ระบบใช้แท็กความชอบไปแนะนำ <strong>ห้องชมรม</strong> และไฮไลต์ <strong>เพื่อนที่ตรงจริต</strong> เมื่อเดินผ่านกัน</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon icon-mint">💬</div>
+          <h3>@ คุยส่วนตัวในเกม &amp; เชื่อมต่อ LINE</h3>
+          <ul>
+            <li><strong>Speech Bubble &amp; @DM:</strong> พิมพ์คุยลอยเหนือหัว หรือพิมพ์ <span class="chip">@ชื่อเพื่อน</span> เพื่อกระซิบคุยส่วนตัว 1-on-1</li>
+            <li><strong>Quick Connect LINE:</strong> ปุ่มลิงก์ไปคุย/โทรต่อใน LINE ส่วนตัว (ตั้งค่าความเป็นส่วนตัวได้ว่าจะโชว์ให้เฉพาะเพื่อนหรือไม่)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: PRESENTATION & PDF STUDY -->
+    <section class="block" id="stage">
+      <div class="section-header">
+        <span class="section-num">ส่วนที่ 03</span>
+        <h2>เวทีฝึกพรีเซนต์ &amp; ระบบติวข้อสอบ (PDF + Quiz)</h2>
+        <p>ออกแบบหน้าจอให้พื้นที่แผนที่โล่งสบายตา ย้ายแถบกล้องผู้พูดไว้ด้านบน และเปิดเอกสาร PDF / ข้อสอบซ้อนขึ้นมาได้อย่างลื่นไหล</p>
+      </div>
+
+      <figure class="figure-card">
+        <img src="./images/presentation-study-pdf.jpg" alt="ภาพคอนเซปต์เวทีฝึกพรีเซนต์และกระดานติว PDF" data-zoom />
+        <figcaption class="figure-caption">
+          <span><strong>ภาพอ้างอิงที่ 3:</strong> ผู้พูดยืนบนเวที Spotlight พร้อมตัวจับเวลา <span class="chip">04:32</span> แถบกล้องผู้พูดด้านบน รีแอ็กชันลอยจากผู้ฟัง และหน้าต่าง Collaborative PDF + Quiz O/X</span>
+          <span class="zoom-hint">🔍 คลิกที่ภาพเพื่อขยาย</span>
+        </figcaption>
+      </figure>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon icon-amber">🎙️</div>
+          <h3>โหมดฝึกพรีเซนต์ (Stage &amp; Spotlight)</h3>
+          <ul>
+            <li><strong>Podium Broadcast:</strong> ก้าวขึ้นแท่นพูดแล้วเสียงและสไลด์จะกระจายสู่ทุกคนในห้อง พร้อมตัวจับเวลาถอยหลัง</li>
+            <li><strong>รีแอ็กชัน &amp; Feedback:</strong> ผู้ฟังกดปรบมือ ยกมือถาม หรือส่งหัวใจลอยเหนือหัว และพิมพ์คอมเมนต์ให้คะแนนหลังจบได้</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon icon-indigo">📄</div>
+          <h3>ยัด PDF แชร์ติวร่วมกัน (PDF Locker)</h3>
+          <ul>
+            <li><strong>อัปโหลดแปะกระดาน:</strong> ลากไฟล์ PDF (ชีทสรุป, แนวข้อสอบ) วางบนไวท์บอร์ดหรือชั้นหนังสือประจำห้อง</li>
+            <li><strong>อ่านและขีดเขียนพร้อมกัน:</strong> เปิดดูหน้าเดียวกันแบบ Sync มี Laser Pointer ชี้จุดสำคัญและไฮไลต์ข้อความได้</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon icon-coral">✅</div>
+          <h3>โหมดติวข้อสอบ &amp; มินิเกม Quiz</h3>
+          <ul>
+            <li><strong>Quiz Modal Overlay:</strong> เด้งการ์ดคำถาม O/X หรือ A/B/C/D ให้ทุกคนในโต๊ะกดตอบพร้อมกัน พร้อมปุ่ม Hint และเฉลย</li>
+            <li><strong>Spatial Quiz Zone:</strong> เปลี่ยนพื้นห้องเป็นโซนคำตอบ ให้อวตารวิ่งไปยืนฝั่งที่คิดว่าถูกก่อนหมดเวลา</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: UI LAYOUT & ROADMAP -->
+    <section class="block" id="roadmap">
+      <div class="section-header">
+        <span class="section-num">ส่วนที่ 04</span>
+        <h2>สรุปการจัดวางหน้าจอ &amp; แนวทางพัฒนา (MVP Roadmap)</h2>
+        <p>แบ่งเฟสการพัฒนาเป็น 3 ระยะ เพื่อสร้างตัวต้นแบบ (Prototype) ที่ใช้งานได้จริงเร็วที่สุดก่อนขยายฟีเจอร์</p>
+      </div>
+
+      <div class="card" style="margin-bottom: 22px;">
+        <h3>โครงสร้างหน้าจอเว็บ 4 ส่วน (Web Layout Architecture)</h3>
+        <ul>
+          <li><strong>1. Canvas กลางจอ (80%+):</strong> แผนที่ห้อง/ตึก 2.5D ตัวละครเดินได้อิสระ และ Speech Bubble ข้อความ</li>
+          <li><strong>2. แถบซ้าย (Navigation):</strong> ปุ่มสลับชั้น (<span class="chip">1F</span> <span class="chip">2F</span> <span class="chip">3F</span>) พิกัดตำแหน่งปัจจุบัน และปุ่ม Warp</li>
+          <li><strong>3. แถบบน (Active Media):</strong> แสดงแถบกล้องผู้พูดบนเวที/กลุ่มใกล้เคียง และปุ่มเปิดไฟล์ PDF ที่กำลังติวอยู่</li>
+          <li><strong>4. แถบล่าง (Floating Dock):</strong> ปุ่มเปิด-ปิดไมค์, ท่าทาง/อีโมต, ช่องพิมพ์แช็ต &amp; <span class="chip">@DM</span>, ตู้เสื้อผ้า และปุ่มแต่งห้อง</li>
+        </ul>
+      </div>
+
+      <div class="roadmap-grid">
+        <div class="phase-card">
+          <div class="phase-label">Phase 1 — Core MVP</div>
+          <h3>แผนที่ 2D + เวที + PDF</h3>
+          <ul>
+            <li>ห้องพื้นฐานและตัวละครเดินบน Canvas</li>
+            <li>ระบบเสียง/ไมค์ผ่าน WebRTC (Stage &amp; Proximity)</li>
+            <li>อัปโหลดไฟล์ PDF ขึ้นกระดานและซ้อมจับเวลา</li>
+          </ul>
+        </div>
+
+        <div class="phase-card p2">
+          <div class="phase-label">Phase 2 — Social &amp; Avatar</div>
+          <h3>แต่งตัว + โปรไฟล์ + @DM</h3>
+          <ul>
+            <li>ระบบอวตาร Layered 2D และ Closet แต่งตัว</li>
+            <li>Profile Card + แบบสอบถามความชอบ &amp; แท็ก</li>
+            <li>แช็ต <span class="chip">@username</span> ส่วนตัว และ Speech Bubble</li>
+          </ul>
+        </div>
+
+        <div class="phase-card p3">
+          <div class="phase-label">Phase 3 — Ecosystem</div>
+          <h3>ตึกหลายชั้น + แต่งห้อง + LINE</h3>
+          <ul>
+            <li>ตึกหลายชั้น &amp; ระบบหัวหน้าห้องแต่งเฟอร์นิเจอร์</li>
+            <li>มินิเกม Quiz ข้อสอบ และแต้มแลกไอเทม</li>
+            <li>เชื่อมต่อ LINE Login / ลิงก์ห้องคุย LINE ส่วนตัว</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Virtual Campus &amp; Presentation Hub — เอกสารสรุปแนวคิดและภาพอ้างอิง UI/UX
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <img src="" alt="ภาพขยาย" id="lightbox-img" />
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    document.querySelectorAll('img[data-zoom]').forEach((img) => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.classList.remove('open');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') lightbox.classList.remove('open');
+    });
+  </script>
+</body>
+</html>
+
